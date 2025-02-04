@@ -1,0 +1,85 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "title": "cake 1",
+            "slug": "cake1",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake95.jpg"
+        },
+        {
+            "id": 2,
+            "title": "cake 2",
+            "slug": "cake2",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake56.jpg"
+        },
+        {
+            "id": 3,
+            "title": "cake 3",
+            "slug": "cake3",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake57.jpg"
+        },
+        {
+            "id": 4,
+            "title": "cake 4",
+            "slug": "cake4",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake47.jpg"
+        },
+        {
+            "id": 5,
+            "title": "cake 5",
+            "slug": "cake5",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake96.jpg"
+        },
+        {
+            "id": 6,
+            "title": "cake 6",
+            "slug": "cake6",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake49.jpg"
+        },
+        {
+            "id": 7,
+            "title": "cake 7",
+            "slug": "cake7",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake50.jpg"
+        },
+        {
+            "id": 8,
+            "title": "cake 8",
+            "slug": "cake8",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake58.jpg"
+        },
+        {
+            "id": 9,
+            "title": "cake 9",
+            "slug": "cake9",
+            "price": 34,
+            "ingredients": "abcd",
+            "isFeatured": true,
+            "image":"/images/cake52.jpg"
+        }
+    ]
+}
