@@ -1,42 +1,36 @@
 "use client";
-import Link from "next/link";
+
 import { HoverEffect } from "./ui/card-hover-effect";
 
 function Cookies() {
-  const featuredWebinars = [
+  const featuredCookies = [
     {
       title: "Peanut Butter Perfection",
-      slug: "understanding-music-theory",
       isFeatured: true,
       image: "/images/cookie15.jpg",
     },
     {
       title: "Veggie Patties",
-      slug: "the-art-of-songwriting",
       isFeatured: true,
       image: "/images/cookie16.jpg",
     },
     {
       title: "Choco Bliss Bites",
-      slug: "mastering-your-instrument",
       isFeatured: true,
       image: "/images/cookie17.jpg",
     },
     {
       title: "Crispy Jeera Crunch",
-      slug: "music-production-essentials",
       isFeatured: true,
       image: "/images/cookie11.jpg",
     },
     {
       title: "Osmania Crumble",
-      slug: "live-performance-techniques",
       isFeatured: true,
       image: "/images/cookie18.jpg",
     },
     {
       title: "Sweet Honey Crunch",
-      slug: "digital-music-marketing",
       isFeatured: true,
       image: "/images/cookie5.jpg",
     },
@@ -56,10 +50,9 @@ function Cookies() {
           </div>
           <div className="mt-10">
             <HoverEffect
-              items={featuredWebinars.map((webinar) => ({
-                title: webinar.title,
-                link: "/",
-                image: webinar.image,
+              items={featuredCookies.map((cookie) => ({
+                title: cookie.title,
+                image: cookie.image,
               }))}
             />
           </div>

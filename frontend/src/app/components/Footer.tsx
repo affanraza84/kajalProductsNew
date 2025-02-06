@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 function Footer() {
@@ -14,33 +15,33 @@ function Footer() {
           <h2 className="text-white text-lg font-semibold mb-4">Quick Links</h2>
           <ul>
             <li>
-              <a href="/" className="hover:text-white transition-colors duration-300">
+              <Link href="/" className="hover:text-white transition-colors duration-300">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="products" className="hover:text-white transition-colors duration-300">
+              <Link href="products" className="hover:text-white transition-colors duration-300">
                 Products
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="contact" className="hover:text-white transition-colors duration-300">
+              <Link href="contact" className="hover:text-white transition-colors duration-300">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         <div>
           <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
           <div className="flex space-x-4">
-            <a href="https://www.facebook.com/share/18bSLnakAh/" className="hover:text-white transition-colors duration-300">
+            <Link href="https://www.facebook.com/share/18bSLnakAh/" className="hover:text-white transition-colors duration-300">
               <FaFacebook className="inline-block mr-2" />
               Facebook
-            </a>
-            <a href="https://www.instagram.com/kajalgroup_pvt_ltd?igsh=MXJvNjVlMGh2M240NA==" className="hover:text-white transition-colors duration-300">
+            </Link>
+            <Link href="https://www.instagram.com/kajalgroup_pvt_ltd?igsh=MXJvNjVlMGh2M240NA==" className="hover:text-white transition-colors duration-300">
               <FaInstagram className="inline-block mr-2" />
               Instagram
-            </a>
+            </Link>
           </div>
         </div>
         <div>

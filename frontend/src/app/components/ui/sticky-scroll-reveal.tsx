@@ -1,30 +1,42 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { cn } from "@/app/utils/cn";
 
 export const StickyScroll = ({
   content,
-  contentClassName,
 }: {
   content: {
     title: string;
     description: string;
     image: string;
-    content?: React.ReactNode | any;
+    content?: React.ReactNode;
   }[];
   contentClassName?: string;
 }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<any>(null);
+  const [activeCard, setActiveCard] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    container: ref,
+    target: ref, // FIX: Corrected useScroll configuration
     offset: ["start start", "end start"],
   });
   const cardLength = content.length;
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  const backgroundColors = [
+    "var(--pink-500)",
+    "var(--pink-400)",
+    "var(--red-400)",
+  ];
+
+  const linearGradients = [
+    "linear-gradient(to bottom right, #FBB6D0, #FBCFE8)",
+    "linear-gradient(to bottom right, #FCE7F3, #F9A8D4)",
+    "linear-gradient(to bottom right, #FDEAF5, #F9A8D4)",
+  ];
+
+  // Optimize state updates by preventing unnecessary renders
+  const updateActiveCard = useCallback((latest: number) => {
     const cardsBreakpoints = content.map((_, index) => index / cardLength);
     const closestBreakpointIndex = cardsBreakpoints.reduce(
       (acc, breakpoint, index) => {
@@ -36,28 +48,13 @@ export const StickyScroll = ({
       },
       0
     );
-    setActiveCard(closestBreakpointIndex);
-  });
 
-  const backgroundColors = [
-    "var(--pink-500)", // Soft Pink background
-    "var(--pink-400)", // Slightly lighter Pink
-    "var(--red-400)", // Light Purple, complementing Pink
-  ];
+    if (closestBreakpointIndex !== activeCard) {
+      setActiveCard(closestBreakpointIndex);
+    }
+  }, [content, cardLength, activeCard]);
 
-  const linearGradients = [
-    "linear-gradient(to bottom right, #FBB6D0, #FBCFE8)", // Soft Pink to Light Pink Gradient
-    "linear-gradient(to bottom right, #FCE7F3, #F9A8D4)", // Very Light Pink to Soft Pink
-    "linear-gradient(to bottom right, #FDEAF5, #F9A8D4)", // Pastel Lilac to Pink
-  ];
-
-  const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0]
-  );
-
-  useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard]);
+  useMotionValueEvent(scrollYProgress, "change", updateActiveCard);
 
   return (
     <motion.div
@@ -91,9 +88,9 @@ export const StickyScroll = ({
         </div>
       </div>
       <div
-        style={{ background: backgroundGradient }}
-        className="hidden lg:block h-60 w-80 rounded-lg bg-white/10 border border-white/20 shadow-lg sticky top-10 overflow-hidden">
-          <div className="hidden lg:block h-60 w-80 rounded-lg bg-white/10 border border-white/20 shadow-lg sticky top-10 overflow-hidden">
+        style={{ background: linearGradients[activeCard % linearGradients.length] }}
+        className="hidden lg:block h-60 w-80 rounded-lg bg-white/10 border border-white/20 shadow-lg sticky top-10 overflow-hidden"
+      >
         <motion.img
           key={content[activeCard].image}
           src={content[activeCard].image}
@@ -103,7 +100,6 @@ export const StickyScroll = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         />
-        </div>
       </div>
     </motion.div>
   );

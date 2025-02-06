@@ -1,6 +1,5 @@
 "use client";
 
-import { ViewTransitionBuilder } from "framer-motion";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
 
 const variousCakesTestimonials = [
@@ -8,49 +7,49 @@ const variousCakesTestimonials = [
     quote:
       "A fondant cake features smooth, pliable icing, ideal for intricate designs, making it perfect for weddings, birthdays, and special occasions. It's often layered with buttercream or ganache for smoothness and adhesion.",
     name: "Fondant Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "A mousse cake is a rich dessert with airy mousse layered over soft cake. Made with whipped cream and flavors like chocolate or fruit, it offers a smooth, creamy texture perfect for any occasion.",
     name: "Mouse Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "Butter toast is a timeless breakfast favorite made by toasting bread and spreading it with butter. Its crispy texture and rich, melted butter create a simple yet deliciously satisfying start to the day.",
     name: " Butter Toast",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "Red velvet cake is a rich, vibrant dessert with a subtle cocoa flavor, soft velvety texture, and slight tang from buttermilk and vinegar, topped with luscious cream cheese frosting for a perfect treat.",
     name: "Red Velvet Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "Chocolate overloaded cake is a chocoholic's dream, featuring moist chocolate layers, creamy ganache, and a lavish topping of chocolate shavings, chips, curls, and candies for an irresistible, indulgent treat.",
     name: "Chocolate Overloaded Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "A wedding cake is a cherished symbol of love and celebration, traditionally tiered and decorated with frosting, flowers, or toppers, evolving over time to reflect personal styles and unique preferences.",
     name: "Wedding Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "A birthday cake is the heart of every celebration, symbolizing joy and sweet memories. Frosted, decorated, and topped with candles, it brings smiles, wishes, and a deliciously unforgettable moment of happiness.",
     name: "Birthday Cake",
-    title: "abc",
+    title: "",
   },
   {
     quote:
       "Japanese chocolate cake is light, airy, and delicately soft, with a fluffy chiffon-like texture. Made with meringue, milk, or oil, it's moist, tender, and melts in your mouth for a delightful experience.",
     name: "Japanese Chocolate Cake",
-    title: "abc",
+    title: "",
   },
 ];
 

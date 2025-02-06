@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/moving-border";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Spotlight } from "./ui/Spotlight";
 
 const HeroSection = () => {
   const words = ["delicious", "fresh", "tasty", "sweet", "mouthwatering"];
@@ -22,10 +23,14 @@ const HeroSection = () => {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [words]);
 
   return (
     <div className="relative h-auto md:h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0 bg-gradient-to-b from-pink-100 to-white">
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="#ff80ab"
+      />
       <div className="absolute top-0 left-0 w-full h-full bg-black/20 z-1"></div>
 
       <div className="p-4 relative z-10 w-full text-center">
@@ -35,7 +40,7 @@ const HeroSection = () => {
           transition={{ duration: 1 }}
           className="mt-20 md:mt-0 text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-pink-700 to-pink-500 leading-tight md:leading-normal py-2"
         >
-          Welcome to Kajal Bakery's Cakes & Snacks
+          Welcome to Kajal Bakery&apos;s Cakes & Snacks
         </motion.h1>
 
         <motion.p

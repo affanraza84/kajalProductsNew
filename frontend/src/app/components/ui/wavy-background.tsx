@@ -27,14 +27,10 @@ export const WavyBackground = ({
   [key: string]: any;
 }) => {
   const noise = createNoise3D();
-  let w: number,
-    h: number,
-    nt: number,
-    i: number,
-    x: number,
-    ctx: any,
-    canvas: any;
+  let w: number, h: number, nt: number, i: number, x: number, ctx: any, canvas: any;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationIdRef = useRef<number>(0);
+
   const getSpeed = () => {
     switch (speed) {
       case "slow":
@@ -47,17 +43,13 @@ export const WavyBackground = ({
   };
 
   const init = () => {
+    if (!canvasRef.current) return;
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
     w = ctx.canvas.width = window.innerWidth;
     h = ctx.canvas.height = window.innerHeight;
     ctx.filter = `blur(${blur}px)`;
     nt = 0;
-    window.onresize = function () {
-      w = ctx.canvas.width = window.innerWidth;
-      h = ctx.canvas.height = window.innerHeight;
-      ctx.filter = `blur(${blur}px)`;
-    };
     render();
   };
 
@@ -77,7 +69,7 @@ export const WavyBackground = ({
       ctx.lineWidth = waveWidth || 50;
       ctx.strokeStyle = waveColors[i % waveColors.length];
       for (x = 0; x < w; x += 5) {
-        var y = noise(x / 800, 0.3 * i, nt) * 100;
+        const y = noise(x / 800, 0.3 * i, nt) * 100;
         ctx.lineTo(x, y + h * 0.5); // adjust for height, currently at 50% of the container
       }
       ctx.stroke();
@@ -85,22 +77,32 @@ export const WavyBackground = ({
     }
   };
 
-  let animationId: number;
   const render = () => {
-    // Updated background fill to match the warm pink tones
+    if (!canvasRef.current) return;
     ctx.fillStyle = backgroundFill || "#F9F5F1"; // Light off-white background
     ctx.globalAlpha = waveOpacity || 0.5;
     ctx.fillRect(0, 0, w, h);
     drawWave(5);
-    animationId = requestAnimationFrame(render);
+    animationIdRef.current = requestAnimationFrame(render);
   };
 
   useEffect(() => {
     init();
     return () => {
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(animationIdRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!canvasRef.current) return;
+      w = canvasRef.current.width = window.innerWidth;
+      h = canvasRef.current.height = window.innerHeight;
+      ctx.filter = `blur(${blur}px)`;
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [blur]);
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {

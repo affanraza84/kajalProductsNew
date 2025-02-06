@@ -1,7 +1,7 @@
 import { cn } from "@/app/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 export const HoverEffect = ({
   items,
@@ -9,12 +9,11 @@ export const HoverEffect = ({
 }: {
   items: {
     title: string;
-    link: string;
     image: string;
-  }[];
+  }[]; // Removed the link from items
   className?: string;
 }) => {
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div
@@ -24,9 +23,8 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <Link
-          href={item?.link}
-          key={item?.link}
+        <div
+          key={item.title} // Changed key to use title instead of link
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -51,7 +49,7 @@ export const HoverEffect = ({
           <Card image={item.image}>
             <CardTitle>{item.title}</CardTitle>
           </Card>
-        </Link>
+        </div>
       ))}
     </div>
   );
@@ -74,9 +72,12 @@ export const Card = ({
       )}
     >
       {image && (
-        <img
+        <Image
           src={image}
           alt="Card Image"
+          width={100}
+          height={100}
+          unoptimized = {true}
           className="w-full h-40 object-cover rounded-t-2xl"
         />
       )}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import productData from "../data/products.json";
 import { BackgroundGradient } from "./ui/background-gradient";
 import { motion } from "framer-motion";
+import Image from "next/image"; 
 
 interface Product {
   id: number;
@@ -38,10 +39,13 @@ function ProductsDetails() {
               whileHover={{ scale: 1.05 }}
             >
               <BackgroundGradient className="flex flex-col rounded-2xl bg-white shadow-lg overflow-hidden h-full max-w-sm">
-                <img
+                <Image
                   src={product.image}
                   alt={product.title}
+                  width={80}
+                  height={90}
                   className="w-80 h-90 object-cover rounded-t-2xl"
+                  unoptimized={true}
                 />
                 {/* <div className="p-6 flex flex-col items-center text-center flex-grow">
                                 <p className="text-lg sm:text-xl text-pink-700 font-bold mt-4 mb-2">{product.title}</p>
