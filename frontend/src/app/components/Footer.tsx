@@ -52,7 +52,7 @@ function Footer() {
           <p>Phone: +91 9470 050 9040</p>
         </div>
       </div>
-      <p className="text-center text-xs pt-8">© 2025 Kajal Bakery's Cakes & Snacks. All rights reserved.</p>
+      <p className="text-center text-xs pt-8">© 2025 Kajal Bakery&apos;s Cakes & Snacks. All rights reserved.</p>
     </footer>
   );
 }

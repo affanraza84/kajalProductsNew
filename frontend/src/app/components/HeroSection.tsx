@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { Button } from "./ui/moving-border";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Spotlight } from "./ui/Spotlight";
 
 const HeroSection = () => {
-  const words = ["delicious", "fresh", "tasty", "sweet", "mouthwatering"];
+  // Memoize words array to prevent unnecessary re-renders
+  const words = useMemo(
+    () => ["delicious", "fresh", "tasty", "sweet", "mouthwatering"],
+    []
+  );
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [animateHeading, setAnimateHeading] = useState(false);
 
@@ -23,7 +27,7 @@ const HeroSection = () => {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [words]);
+  }, [words]); // ✅ words is now stable and doesn't trigger infinite re-renders
 
   return (
     <div className="relative h-auto md:h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0 bg-gradient-to-b from-pink-100 to-white">
