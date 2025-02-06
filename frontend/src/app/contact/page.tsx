@@ -18,7 +18,7 @@ export default function ContactPage() {
     setSuccess("");
 
     try {
-      const res = await fetch("https://kajalproducts-backend.onrender.com", { 
+      const res = await fetch("http://localhost:5000/api/contact", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -40,7 +40,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-12 pt-36 flex flex-col items-center">
+    <section id="contact">
+       <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-12 pt-36 flex flex-col items-center">
       <motion.h1 className="text-3xl md:text-6xl font-bold text-pink-700 mb-8 text-center">
         Contact Us
       </motion.h1>
@@ -78,5 +79,6 @@ export default function ContactPage() {
         {success && <p className="text-green-600 text-center mt-2">{success}</p>}
       </motion.div>
     </div>
+    </section>
   );
 }

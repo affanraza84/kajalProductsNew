@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect(process.env.MONGO_URI, { dbName: "kajalproducts" }) 
+  .connect(process.env.MONGO_URI, { dbName: "kajalproducts" })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Connection Error:", err.message));
 
