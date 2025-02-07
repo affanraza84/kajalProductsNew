@@ -29,7 +29,7 @@ const HeroSection = () => {
   }, [words]);
 
   return (
-    <div className="relative h-auto md:h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0 bg-gradient-to-b from-pink-100 to-white">
+    <div className="relative h-auto md:h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0 bg-gradient-to-b from-pink-200 to-white">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="#D42F7A"

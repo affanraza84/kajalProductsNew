@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/app/utils/cn";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -27,29 +27,20 @@ export const WavyBackground = ({
 }) => {
   const noise = createNoise3D();
 
-  // Canvas refs
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
   const animationIdRef = useRef<number>(0);
 
-  // Wave properties
   const w = useRef<number>(0);
   const h = useRef<number>(0);
   const nt = useRef<number>(0);
 
-  // Speed control
   const getSpeed = () => (speed === "fast" ? 0.002 : 0.001);
 
-  // Color palette
   const waveColors = colors ?? [
-    "#FEC2D7", // Soft pink
-    "#F9A8D4", // Blush pink
-    "#F472B6", // Hot pink
-    "#FBCFE8", // Light pink
-    "#F9A8D4", // Blush pink
+    "#FEC2D7", "#F9A8D4", "#F472B6", "#FBCFE8", "#F9A8D4",
   ];
 
-  // Function to draw waves
   const drawWave = (n: number) => {
     if (!ctx.current) return;
     nt.current += getSpeed();
@@ -69,8 +60,7 @@ export const WavyBackground = ({
     }
   };
 
-  // Render animation
-  const render = () => {
+  const render = useCallback(() => {
     if (!canvasRef.current || !ctx.current) return;
 
     ctx.current.fillStyle = backgroundFill;
@@ -79,15 +69,14 @@ export const WavyBackground = ({
     
     drawWave(5);
     animationIdRef.current = requestAnimationFrame(render);
-  };
+  }, [backgroundFill, waveOpacity]);
 
-  // Initialize canvas
-  const init = () => {
+  const init = useCallback(() => {
     if (!canvasRef.current) return;
     
     ctx.current = canvasRef.current.getContext("2d");
     if (!ctx.current) {
-      console.error("Unable to get canvas context");
+      console.log("Unable to get canvas context");
       return;
     }
 
@@ -95,11 +84,14 @@ export const WavyBackground = ({
     h.current = canvasRef.current.height = window.innerHeight;
     ctx.current.filter = `blur(${blur}px)`;
     nt.current = 0;
-
     render();
-  };
+  }, [blur, render]);
 
-  // Resize event listener
+  useEffect(() => {
+    init();
+    return () => cancelAnimationFrame(animationIdRef.current);
+  }, [init]);
+
   useEffect(() => {
     const handleResize = () => {
       if (!canvasRef.current) return;
@@ -112,13 +104,6 @@ export const WavyBackground = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [blur]);
 
-  // Start animation on mount
-  useEffect(() => {
-    init();
-    return () => cancelAnimationFrame(animationIdRef.current);
-  }, []);
-
-  // Safari browser check
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
     setIsSafari(

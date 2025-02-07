@@ -15,17 +15,17 @@ function Footer() {
           <h2 className="text-white text-lg font-semibold mb-4">Quick Links</h2>
           <ul>
             <li>
-              <Link href="/" className="hover:text-white transition-colors duration-300">
+              <Link href="/" className="hover:text-white hover:scale-105 transition-transform duration-300">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="products" className="hover:text-white transition-colors duration-300">
+              <Link href="products" className="hover:text-white hover:scale-105 transition-transform duration-300">
                 Products
               </Link>
             </li>
             <li>
-              <Link href="contact" className="hover:text-white transition-colors duration-300">
+              <Link href="contact" className="hover:text-white hover:scale-105 transition-transform duration-300">
                 Contact
               </Link>
             </li>
@@ -34,11 +34,11 @@ function Footer() {
         <div>
           <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
           <div className="flex space-x-4">
-            <Link href="https://www.facebook.com/share/18bSLnakAh/" className="hover:text-white transition-colors duration-300">
+            <Link href="https://www.facebook.com/share/18bSLnakAh/" className="hover:text-white hover:scale-105 transition-transform duration-300">
               <FaFacebook className="inline-block mr-2" />
               Facebook
             </Link>
-            <Link href="https://www.instagram.com/kajalgroup_pvt_ltd?igsh=MXJvNjVlMGh2M240NA==" className="hover:text-white transition-colors duration-300">
+            <Link href="https://www.instagram.com/kajalgroup_pvt_ltd?igsh=MXJvNjVlMGh2M240NA==" className="hover:text-white hover:scale-105 transition-transform duration-300">
               <FaInstagram className="inline-block mr-2" />
               Instagram
             </Link>
