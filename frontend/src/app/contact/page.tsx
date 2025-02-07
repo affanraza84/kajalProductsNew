@@ -39,8 +39,9 @@ export default function ContactPage() {
       } else {
         alert(data.error || "Something went wrong!");
       }
-    } catch (_error) {
+    } catch (error) {
       setLoading(false);
+      console.error("Fetch eror: ", error);
       alert("Failed to connect to the server.");
     }
   };
