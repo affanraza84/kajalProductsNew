@@ -15,7 +15,7 @@ mongoose
 
 const Contact = require("./models/Contact");
 
-app.get("/contact", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
