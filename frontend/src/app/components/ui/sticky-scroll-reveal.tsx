@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const StickyScroll = ({
   content,
@@ -13,7 +13,7 @@ export const StickyScroll = ({
   }[];
   contentClassName?: string;
 }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
+  const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     container: ref,
@@ -36,24 +36,15 @@ export const StickyScroll = ({
     setActiveCard(closestBreakpointIndex);
   });
 
-  const backgroundColors = [
-    "var(--pink-500)",
-    "var(--pink-400)",
-    "var(--red-400)",
-  ];
-  const linearGradients = [
-    "linear-gradient(to bottom right, #FBB6D0, #FBCFE8)",
-    "linear-gradient(to bottom right, #FCE7F3, #F9A8D4)",
-    "linear-gradient(to bottom right, #FDEAF5, #F9A8D4)",
-  ];
-
-  const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0]
+  const backgroundColors = ["var(--pink-500)", "var(--pink-400)", "var(--red-400)"];
+  const linearGradients = useMemo(
+    () => [
+      "linear-gradient(to bottom right, #FBB6D0, #FBCFE8)",
+      "linear-gradient(to bottom right, #FCE7F3, #F9A8D4)",
+      "linear-gradient(to bottom right, #FDEAF5, #F9A8D4)",
+    ],
+    []
   );
-
-  useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard, linearGradients]);
 
   return (
     <motion.div
@@ -68,23 +59,15 @@ export const StickyScroll = ({
           {content.map((item, index) => (
             <div key={item.title + index} className="my-20">
               <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
                 className="text-3xl font-bold text-white"
               >
                 {item.title}
               </motion.h2>
               <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
                 className="text-lg text-gray-300 max-w-sm mt-10"
               >
                 {item.description}
@@ -95,20 +78,21 @@ export const StickyScroll = ({
         </div>
       </div>
       <div
-        style={{
-          background: linearGradients[activeCard % linearGradients.length],
-        }}
+        style={{ background: linearGradients[activeCard % linearGradients.length] }}
         className="hidden lg:block h-60 w-80 rounded-lg bg-white/10 border border-white/20 shadow-lg sticky top-10 overflow-hidden"
       >
-        <motion.img
-          key={activeCard}
-          src={content[activeCard].image}
-          alt={content[activeCard].title}
-          className="h-auto w-full object-cover rounded-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        />
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={content[activeCard].image}
+            src={content[activeCard].image}
+            alt={content[activeCard].title}
+            className="h-auto w-full object-cover rounded-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ opacity: { duration: 0.5 }, y: { duration: 0.3 } }}
+          />
+        </AnimatePresence>
       </div>
     </motion.div>
   );
