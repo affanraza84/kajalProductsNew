@@ -7,7 +7,7 @@ import Link from "next/link";
 const menuItems = [
   { title: "Home", href: "/" },
   { title: "Products", href: "/products" },
-  { title: "adfadf Outlets", href: "/outlets" },
+  { title: "Outlets", href: "/outlets" },
   { title: "Contact Us", href: "/contact" },
 ];
 
