@@ -26,8 +26,8 @@ app.post("/api/contact", async (req, res) => {
     await newContact.save();
 
     res.status(201).json({ message: "Message received successfully" });
-  } catch (error) {
-    console.error("Error saving contact:", error.message);
+  } catch (_error) {
+    console.error("Error saving contact:", _error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
