@@ -3,15 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-
-app.get("/contact", (req, res) => {
-  res.send("Backend is running!");
-});
-
-app.use(express.json());
-
-
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
@@ -21,6 +14,10 @@ mongoose
   .catch((err) => console.error("MongoDB Connection Error:", err.message));
 
 const Contact = require("./models/Contact");
+
+app.get("/contact", (req, res) => {
+  res.send("Backend is running!");
+});
 
 app.post("/api/contact", async (req, res) => {
   try {
@@ -34,9 +31,9 @@ app.post("/api/contact", async (req, res) => {
     await newContact.save();
 
     res.status(201).json({ message: "Message received successfully" });
-  } catch (_error) {
-    console.error("Error saving contact:", _error.message);
-    res.status(500).json({ _error: "Internal Server Error" });
+  } catch (error) {
+    console.error("Error saving contact:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
