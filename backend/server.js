@@ -3,6 +3,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
+app.get("/contact", (req, res) => {
+  res.send("Backend is running!");
+});
+
+app.use(express.json());
+
+
 const app = express();
 app.use(express.json());
 app.use(cors());
