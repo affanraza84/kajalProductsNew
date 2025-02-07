@@ -139,15 +139,19 @@ function Page() {
                   />
                 </CardItem>
                 <div className="flex justify-between items-center mt-6">
-                  <CardItem
-                    translateZ={20}
-                    as={Link}
+                  <Link
                     href={cake.slug}
+                    passHref
                     target="_blank"
-                    className="px-4 py-2 rounded-xl text-sm font-semibold text-pink-700 hover:underline"
+                    rel="noopener noreferrer"
                   >
-                    Try now →
-                  </CardItem>
+                    <CardItem
+                      translateZ={20}
+                      className="px-4 py-2 rounded-xl text-sm font-semibold text-pink-700 hover:underline"
+                    >
+                      Try now →
+                    </CardItem>
+                  </Link>
                 </div>
               </CardBody>
             </CardContainer>
