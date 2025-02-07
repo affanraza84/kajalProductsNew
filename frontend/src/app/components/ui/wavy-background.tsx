@@ -26,8 +26,8 @@ export const WavyBackground = ({
   waveOpacity?: number;
 }) => {
   const noise = createNoise3D();
-  
-  // Use useRef to persist mutable values
+
+  // Persist mutable values using useRef
   const w = useRef<number>(0);
   const h = useRef<number>(0);
   const nt = useRef<number>(0);
@@ -35,20 +35,23 @@ export const WavyBackground = ({
   const x = useRef<number>(0);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
   const canvas = useRef<HTMLCanvasElement | null>(null);
-  
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationIdRef = useRef<number>(0);
 
-  const getSpeed = () => {
-    switch (speed) {
-      case "slow":
-        return 0.001;
-      case "fast":
-        return 0.002;
-      default:
-        return 0.001;
+  const getSpeed = () => (speed === "fast" ? 0.002 : 0.001);
+
+  // Move `render` above `init` to avoid using before declaration
+  const render = useCallback(() => {
+    if (!canvasRef.current) return;
+    if (ctx.current) {
+      ctx.current.fillStyle = backgroundFill || "#F9F5F1";
+      ctx.current.globalAlpha = waveOpacity || 0.5;
+      ctx.current.fillRect(0, 0, w.current, h.current);
+      drawWave(5);
+      animationIdRef.current = requestAnimationFrame(render);
     }
-  };
+  }, [backgroundFill, waveOpacity]);
 
   const init = useCallback(() => {
     if (!canvasRef.current) return;
@@ -60,23 +63,24 @@ export const WavyBackground = ({
       h.current = ctx.current.canvas.height = window.innerHeight;
       ctx.current.filter = `blur(${blur}px)`;
       nt.current = 0;
-      render(); // 🔹 Assuming render() is properly defined elsewhere
+      render(); // ✅ No more "used before declaration" error
     } else {
       console.log("Unable to get canvas context");
     }
-  }, [blur]); // 🔹 Memoizing init, so it only changes when 'blur' changes
+  }, [blur, render]); // ✅ render is now properly included as a dependency
 
   useEffect(() => {
     init();
+    return () => cancelAnimationFrame(animationIdRef.current);
   }, [init]);
 
-  // New pink color palette for the wave
+  // Define color palette
   const waveColors = colors ?? [
     "#FEC2D7", // Soft pink
     "#F9A8D4", // Blush pink
     "#F472B6", // Hot pink
     "#FBCFE8", // Light pink
-    "#F9A8D4", // Blush pink again for a more unified look
+    "#F9A8D4", // Blush pink
   ];
 
   const drawWave = (n: number) => {
@@ -88,7 +92,7 @@ export const WavyBackground = ({
         ctx.current.strokeStyle = waveColors[i.current % waveColors.length];
         for (x.current = 0; x.current < w.current; x.current += 5) {
           const y = noise(x.current / 800, 0.3 * i.current, nt.current) * 100;
-          ctx.current.lineTo(x.current, y + h.current * 0.5); // adjust for height, currently at 50% of the container
+          ctx.current.lineTo(x.current, y + h.current * 0.5);
         }
         ctx.current.stroke();
         ctx.current.closePath();
@@ -96,33 +100,16 @@ export const WavyBackground = ({
     }
   };
 
-  const render = () => {
-    if (!canvasRef.current) return;
-    if (ctx.current) {
-      ctx.current.fillStyle = backgroundFill || "#F9F5F1";
-      ctx.current.globalAlpha = waveOpacity || 0.5;
-      ctx.current.fillRect(0, 0, w.current, h.current);
-      drawWave(5);
-      animationIdRef.current = requestAnimationFrame(render);
-    }
-  };
-
-  useEffect(() => {
-    init();
-    return () => {
-      cancelAnimationFrame(animationIdRef.current);
-    };
-  }, [init]);
-
   useEffect(() => {
     const handleResize = () => {
       if (!canvasRef.current) return;
       w.current = canvasRef.current.width = window.innerWidth;
       h.current = canvasRef.current.height = window.innerHeight;
-      if(ctx.current){
+      if (ctx.current) {
         ctx.current.filter = `blur(${blur}px)`;
       }
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [blur]);
@@ -134,7 +121,7 @@ export const WavyBackground = ({
         navigator.userAgent.includes("Safari") &&
         !navigator.userAgent.includes("Chrome")
     );
-  }, [setIsSafari]);
+  }, []);
 
   return (
     <div
