@@ -71,7 +71,7 @@ export default {
           transform: "translate(-50%,-40%) scale(1)",
         },
       },
-      scroll: {
+      scrolls: {
         to: {
           transform: "translate(calc(-50% - 0.5rem))",
         },
