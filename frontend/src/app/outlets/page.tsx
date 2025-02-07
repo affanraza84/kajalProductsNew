@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { cn } from "@/app/utils/cn";
 import Link from "next/link";
 
 const outlets = [

@@ -94,7 +94,7 @@ export const WavyBackground = ({
   const render = () => {
     if (!canvasRef.current) return;
     if (ctx.current) {
-      ctx.current.fillStyle = backgroundFill || "#F9F5F1"; // Light off-white background
+      ctx.current.fillStyle = backgroundFill || "#F9F5F1";
       ctx.current.globalAlpha = waveOpacity || 0.5;
       ctx.current.fillRect(0, 0, w.current, h.current);
       drawWave(5);
@@ -107,7 +107,7 @@ export const WavyBackground = ({
     return () => {
       cancelAnimationFrame(animationIdRef.current);
     };
-  }, []); // Empty dependency array to run only once on mount
+  }, [init]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -129,7 +129,7 @@ export const WavyBackground = ({
         navigator.userAgent.includes("Safari") &&
         !navigator.userAgent.includes("Chrome")
     );
-  }, []);
+  }, [setIsSafari]);
 
   return (
     <div

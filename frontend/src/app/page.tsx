@@ -1,4 +1,3 @@
-import { Cookie } from "next/font/google";
 import HeroSection from "./components/HeroSection";
 import ProductsDetails from "./components/ProductsDetails";
 import TestimonialCards from "./components/TestimonialCards";
