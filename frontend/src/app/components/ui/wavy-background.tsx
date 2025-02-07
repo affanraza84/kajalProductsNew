@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/app/utils/cn";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -50,20 +50,25 @@ export const WavyBackground = ({
     }
   };
 
-  const init = () => {
+  const init = useCallback(() => {
     if (!canvasRef.current) return;
     canvas.current = canvasRef.current;
     ctx.current = canvas.current.getContext("2d");
+
     if (ctx.current) {
       w.current = ctx.current.canvas.width = window.innerWidth;
       h.current = ctx.current.canvas.height = window.innerHeight;
       ctx.current.filter = `blur(${blur}px)`;
       nt.current = 0;
-      render();
+      render(); // 🔹 Assuming render() is properly defined elsewhere
     } else {
-      console.log("unable to get canvas");
+      console.log("Unable to get canvas context");
     }
-  };
+  }, [blur]); // 🔹 Memoizing init, so it only changes when 'blur' changes
+
+  useEffect(() => {
+    init();
+  }, [init]);
 
   // New pink color palette for the wave
   const waveColors = colors ?? [

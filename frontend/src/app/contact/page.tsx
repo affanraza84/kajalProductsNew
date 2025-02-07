@@ -41,7 +41,7 @@ export default function ContactPage() {
       }
     } catch (error) {
       setLoading(false);
-      console.log("Fetch eror: ", error);
+      console.error("Fetch eror: ", error);
       alert("Failed to connect to the server.");
     }
   };
