@@ -58,25 +58,27 @@ const HeroSection = () => {
           flavors, time-honored traditions, and a touch of magic.
         </motion.p>
 
+        {/* ✅ Fix: Set a fixed width based on longest word to prevent collapsing */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="mt-4 font-normal text-base md:text-lg text-gray-600 max-w-lg mx-auto"
+          className="mt-4 font-normal text-base md:text-lg text-gray-600 max-w-lg mx-auto flex justify-center"
         >
           Our cakes are always{" "}
-          <motion.span
-            key={currentWord}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-extrabold
-        bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 
-        text-transparent bg-clip-text animate-gradient glow"
-          >
-            {currentWord}
-          </motion.span>{" "}
+          <span className="relative inline-block text-center w-[12ch]">
+            <motion.span
+              key={currentWord}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 
+              text-transparent bg-clip-text animate-gradient glow"
+            >
+              {currentWord}
+            </motion.span>
+          </span>{" "}
           and made with love!
         </motion.p>
 

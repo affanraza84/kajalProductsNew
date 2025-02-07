@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const menuItems = [
   { title: "Home", href: "/" },
-  { title: "Our Products", href: "/products" },
-  { title: "Our Outlets", href: "/outlets" },
+  { title: "Products", href: "/products" },
+  { title: "Outlets", href: "/outlets" },
   { title: "Contact Us", href: "/contact" },
 ];
 

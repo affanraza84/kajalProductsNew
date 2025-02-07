@@ -44,7 +44,7 @@ function ProductsDetails() {
                   alt={product.title}
                   width={80}
                   height={90}
-                  className="w-80 h-90 object-cover rounded-t-2xl"
+                  className="w-full sm:w-80 h-[50vh] sm:h-90 object-cover rounded-t-2xl"
                   unoptimized={true}
                 />
                 {/* <div className="p-6 flex flex-col items-center text-center flex-grow">

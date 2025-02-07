@@ -20,7 +20,7 @@ const outlets = [
 export default function OurOutlets() {
   return (
     <section id="outlets">
-      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-16 px-6">
+      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white px-6 py-24 pt-36 md:pt-36 lg:pt-40">
         <motion.h1
           className="text-center text-4xl font-bold text-pink-700"
           initial={{ opacity: 0, y: -20 }}

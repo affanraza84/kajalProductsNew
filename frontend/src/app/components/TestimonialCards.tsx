@@ -55,20 +55,20 @@ const variousCakesTestimonials = [
 
 function TestimonialCards() {
   return (
-    <div className="h-[40rem] w-full bg-gradient-to-b from-pink-100 to-white relative flex flex-col items-center justify-center overflow-hidden">
-      <h2 className="text-3xl font-bold text-center mb-8 text-pink-700">
-        Explore our exquisite range of products
-        <div className="flex justify-center w-full overflow-hidden px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-6xl">
-            <InfiniteMovingCards
-              items={variousCakesTestimonials}
-              direction="right"
-              speed="fast"
-            />
-          </div>
-        </div>
-      </h2>
-    </div>
+    <div className="h-auto min-h-[30rem] w-full bg-gradient-to-b from-pink-100 to-white relative flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-10">
+  <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-pink-700">
+    Explore our exquisite range of products
+  </h2>
+
+  <div className="w-full max-w-6xl">
+    <InfiniteMovingCards
+      items={variousCakesTestimonials}
+      direction="right"
+      speed="normal"
+    />
+  </div>
+</div>
+
   );
 }
 
