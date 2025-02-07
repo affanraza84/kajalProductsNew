@@ -7,7 +7,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Spotlight } from "./ui/Spotlight";
 
 const HeroSection = () => {
-  // Memoize words array to prevent unnecessary re-renders
   const words = useMemo(
     () => ["delicious", "fresh", "tasty", "sweet", "mouthwatering"],
     []
@@ -27,7 +26,7 @@ const HeroSection = () => {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [words]); // ✅ words is now stable and doesn't trigger infinite re-renders
+  }, [words]);
 
   return (
     <div className="relative h-auto md:h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0 bg-gradient-to-b from-pink-100 to-white">
