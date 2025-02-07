@@ -6,4 +6,21 @@ const nextConfig: NextConfig = {
 }
  } 
 
+ module.exports = {
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*", // Change "*" to specific frontend domain for security
+          },
+        ],
+      },
+    ];
+  },
+};
+
+
 export default nextConfig;
