@@ -64,7 +64,7 @@ function TestimonialCards() {
     <InfiniteMovingCards
       items={variousCakesTestimonials}
       direction="right"
-      speed="normal"
+      speed="fast"
     />
   </div>
 </div>
