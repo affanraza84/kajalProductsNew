@@ -52,10 +52,7 @@ const HeroSection = () => {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="mt-4 font-normal text-base md:text-lg text-gray-600 max-w-lg mx-auto"
         >
-          Indulge in the finest collection of handmade cakes, artisanal cookies,
-          and delectable snacks, each crafted with love, passion, and the finest
-          ingredients. Every bite is a delightful journey, blending rich
-          flavors, time-honored traditions, and a touch of magic.
+          Indulge in our exquisite selection of **handmade cakes, artisanal cookies, and delectable snacks, each crafted with **love, passion, and the finest ingredients. We take pride in offering **100% eggless cakes, ensuring that everyone can enjoy our treats without compromise. Every bite is a delightful journey, blending rich flavors, time-honored traditions, and a touch of magic to create unforgettable moments of sweetness.
         </motion.p>
 
         {/* ✅ Fix: Set a fixed width based on longest word to prevent collapsing */}
