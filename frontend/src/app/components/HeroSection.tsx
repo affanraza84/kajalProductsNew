@@ -8,7 +8,7 @@ import { Spotlight } from "./ui/Spotlight";
 
 const HeroSection = () => {
   const words = useMemo(
-    () => ["delicious", "fresh", "tasty", "sweet", "mouthwatering"],
+    () => ["butry", "flaky", "fresh", "puffy", "spong"],
     []
   );
   const [currentWord, setCurrentWord] = useState(words[0]);
@@ -41,7 +41,7 @@ const HeroSection = () => {
           initial={{ y: -50, opacity: 0 }}
           animate={animateHeading ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 1 }}
-          className="mt-20 md:mt-0 text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-pink-700 to-pink-500 leading-tight md:leading-normal py-2"
+          className="pt-24 md:pt-10 text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-pink-700 to-pink-500 leading-tight md:leading-normal py-2"
         >
           Welcome to Kajal Bakery&apos;s Cakes & Snacks
         </motion.h1>
@@ -52,10 +52,9 @@ const HeroSection = () => {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="mt-4 font-normal text-base md:text-lg text-gray-600 max-w-lg mx-auto"
         >
-          Indulge in our exquisite selection of handmade cakes, artisanal cookies, and delectable snacks, each crafted with love, passion, and the finest ingredients. We take pride in offering 100% eggless cakes, ensuring that everyone can enjoy our treats without compromise. Every bite is a delightful journey, blending rich flavors, time-honored traditions, and a touch of magic to create unforgettable moments of sweetness.
+          Indulge in our exquisite selection of handmade cakes, artisanal cookies, and delectable snacks, each crafted with love, passion, and the finest ingredients. We take pride in offering 100% eggless cakes, ensuring that everyone can enjoy our treats without compromise.
         </motion.p>
-
-        {/* ✅ Fix: Set a fixed width based on longest word to prevent collapsing */}
+        
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,7 +62,7 @@ const HeroSection = () => {
           className="mt-4 font-normal text-base md:text-lg text-gray-600 max-w-lg mx-auto flex justify-center"
         >
           Our cakes are always{" "}
-          <span className="relative inline-block text-center w-[12ch]">
+          <span className="relative inline-block text-center w-[6ch]">
             <motion.span
               key={currentWord}
               initial={{ opacity: 0 }}
