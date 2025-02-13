@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "./ui/navbar-menu";
 import { cn } from "@/app/utils/cn";
 import Link from "next/link";
-import { FiMenu, FiX, FiHome, FiBox, FiMapPin, FiPhone } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const menuItems = [
-  { title: "Home", href: "/", icon: <FiHome className="text-pink-700 group-hover:text-pink-900"/> },
-  { title: "Products", href: "/products", icon: <FiBox className="text-pink-700 group-hover:text-pink-900"/> },
-  { title: "Outlets", href: "/outlets", icon: <FiMapPin className="text-pink-700 group-hover:text-pink-900"/> },
-  { title: "Contact Us", href: "/contact", icon: <FiPhone className="text-pink-700 group-hover:text-pink-900"/> },
+  { title: "Home", href: "/" },
+  { title: "Products", href: "/products" },
+  { title: "Outlets", href: "/outlets" },
+  { title: "Contact Us", href: "/contact" },
 ];
 
 function Navbar({ className }: { className?: string }) {
@@ -35,9 +36,8 @@ function Navbar({ className }: { className?: string }) {
       <Menu setActive={setActive}>
         {menuItems.map((item) => (
           <div key={item.title} className="p-2 hover:bg-pink-200 rounded-md">
-            <Link href={item.href} className="flex items-center space-x-2">
-              {item.icon}
-              <span className="text-pink-700 font-semibold">{item.title}</span>
+            <Link href={item.href} className="text-pink-700 font-semibold">
+              {item.title}
             </Link>
           </div>
         ))}
@@ -52,27 +52,36 @@ function Navbar({ className }: { className?: string }) {
         </button>
       )}
 
-      {isOpen && (
-        <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col space-y-4 z-50">
-          <button
-            className="self-end text-gray-600 hover:text-pink-700"
-            onClick={() => setIsOpen(false)}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: -250 }}
+            animate={{ x: 0 }}
+            exit={{ x: -250 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col space-y-4 z-50"
           >
-            <FiX size={24} />
-          </button>
-          {menuItems.map((item) => (
-            <div
-              key={item.title}
-              className="flex items-center space-x-3 p-3 rounded-md text-pink-700 hover:bg-pink-200 transition-all cursor-pointer"
+            <button
+              className="self-end text-gray-600 hover:text-pink-700"
+              onClick={() => setIsOpen(false)}
             >
-              {item.icon}
-              <Link href={item.href} className="text-lg font-semibold">
-                {item.title}
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+              <FiX size={24} />
+            </button>
+            {menuItems.map((item) => (
+              <motion.div
+                key={item.title}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-md text-pink-700 hover:bg-pink-200 transition-all cursor-pointer"
+              >
+                <Link href={item.href} className="text-lg font-semibold">
+                  {item.title}
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

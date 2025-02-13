@@ -3,17 +3,20 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { FiMapPin } from "react-icons/fi";
 
 const outlets = [
   {
     name: "Kajal's Bake & Bliss Budhiyakhad",
     location: "Budhiyakhad, Giridih Jharkhand",
     img: "/images/outlet2.jpg",
+    mapLink: "https://maps.app.goo.gl/bXtewvyd2TZHEvg29",
   },
   {
     name: "Kajal's Bake & Bliss Bada Chowk",
     location: "Bhadani Market, Bada Chowk, Giridih Jharkhand",
     img: "/images/outlet1.jpg",
+    mapLink: "https://www.google.com/maps?q=Bhadani+Market,Bada+Chowk,Giridih,Jharkhand",
   },
 ];
 
@@ -60,6 +63,12 @@ export default function OurOutlets() {
                   {outlet.name}
                 </h2>
                 <p className="text-gray-600">{outlet.location}</p>
+                <Link href={outlet.mapLink} target="_blank" rel="noopener noreferrer">
+                  <div className="mt-2 flex items-center justify-center text-pink-600 hover:text-pink-800 cursor-pointer">
+                    <FiMapPin className="mr-2" />
+                    <span>View on Maps</span>
+                  </div>
+                </Link>
               </div>
             </motion.div>
           ))}
