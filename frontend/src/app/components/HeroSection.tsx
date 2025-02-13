@@ -8,7 +8,7 @@ import { Spotlight } from "./ui/Spotlight";
 
 const HeroSection = () => {
   const words = useMemo(
-    () => ["butry", "flaky", "fresh", "puffy", "spong"],
+    () => ["glazy", "softy", "fresh", "puffy", "tasty"],
     []
   );
   const [currentWord, setCurrentWord] = useState(words[0]);
