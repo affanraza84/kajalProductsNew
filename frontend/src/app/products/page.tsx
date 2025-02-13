@@ -109,7 +109,7 @@ function Page() {
   return (
     <section id="cakes">
       <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-12 pt-36">
-        <h1 className="text-3xl md:text-7xl text-center font-bold mb-8 text-pink-700">
+        <h1 className="text-4xl md:mt-4 mt-6 md:text-6xl text-center font-bold mb-8 text-pink-700">
           Baked Wonders
         </h1>
         <div className="flex flex-wrap justify-center">
