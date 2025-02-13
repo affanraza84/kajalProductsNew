@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const cakes = [
   {
@@ -108,10 +109,15 @@ const cakes = [
 function Page() {
   return (
     <section id="cakes">
-      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-12 pt-36">
-        <h1 className="text-4xl md:mt-4 mt-6 md:text-6xl text-center font-bold mb-8 text-pink-700">
+      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white px-6 py-24 pt-36 md:pt-36 lg:pt-40">
+        <motion.h1
+          className="text-center text-4xl font-bold text-pink-700"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           Baked Wonders
-        </h1>
+        </motion.h1>
         <div className="flex flex-wrap justify-center">
           {cakes.map((cake, index) => (
             <CardContainer key={index} className="inter-var m-4">

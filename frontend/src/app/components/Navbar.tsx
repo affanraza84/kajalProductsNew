@@ -10,7 +10,7 @@ const menuItems = [
   { title: "Home", href: "/" },
   { title: "Products", href: "/products" },
   { title: "Outlets", href: "/outlets" },
-  { title: "Contact Us", href: "/contact" },
+  { title: "Contact", href: "/contact" },
 ];
 
 function Navbar({ className }: { className?: string }) {
@@ -29,7 +29,7 @@ function Navbar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "absolute top-10 inset-x-0 max-w-2xl mx-auto z-50 bg-gradient-to-b from-pink-100 to-white rounded-2xl shadow-lg",
+        "absolute top-10 inset-x-0 max-w-xl mx-auto z-50 bg-gradient-to-b from-pink-100 to-white rounded-2xl shadow-lg",
         className
       )}
     >

@@ -53,10 +53,15 @@ export default function ContactPage() {
 
   return (
     <section id="contact">
-      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-12 pt-36 flex flex-col items-center">
-        <motion.h1 className="text-3xl md:text-6xl font-bold text-pink-700 mb-8 text-center">
-          Contact Us
-        </motion.h1>
+      <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white py-18 pt-40 flex flex-col items-center">
+        <motion.h1
+                  className="text-center text-4xl font-bold text-pink-700"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Contact Us
+                </motion.h1>
 
         <motion.div className="bg-pink-100 shadow-lg rounded-2xl p-8 w-full max-w-lg border border-pink-300">
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
