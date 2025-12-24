@@ -15,7 +15,7 @@ const HeroSection = () => {
       setIndex((prev) => (prev + 1) % words.length);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [words.length]);
 
   return (
     <section className="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#FFF8FA]">
