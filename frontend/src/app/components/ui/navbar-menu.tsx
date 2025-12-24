@@ -28,7 +28,7 @@ export const MenuItem = ({
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-pink-700 hover:opacity-[0.9]"
+        className="cursor-pointer text-gray-800 hover:text-pink-600 font-medium transition-colors"
       >
         {item}
       </motion.p>
@@ -39,11 +39,11 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && children && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
+            <div className="absolute top-[calc(100%_+_1.5rem)] left-1/2 transform -translate-x-1/2">
               <motion.div
                 transition={transition}
                 layoutId="active"
-                className="bg-white backdrop-blur-sm rounded-2xl overflow-hidden border border-pink-700 shadow-xl"
+                className="bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/40 shadow-xl ring-1 ring-black/5"
               >
                 <motion.div layout className="w-max h-full p-4">
                   {children}
@@ -67,7 +67,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent bg-gradient-to-b from-pink-100 to-white shadow-lg flex justify-center space-x-4 px-8 py-6 "
+      className="relative rounded-full border border-white/20 bg-white/60 backdrop-blur-md shadow-lg ring-1 ring-black/5 flex justify-center space-x-8 px-10 py-4 "
     >
       {children}
     </nav>
@@ -86,19 +86,21 @@ export const ProductItem = ({
   src: string;
 }) => {
   return (
-    <Link href={href} className="flex space-x-2">
-      <Image
-        src={src}
-        width={140}
-        height={70}
-        alt={title}
-        className="flex-shrink-0 rounded-2xl shadow-lg"
-      />
+    <Link href={href} className="flex space-x-2 group">
+      <div className="overflow-hidden rounded-xl shadow-md">
+        <Image
+          src={src}
+          width={140}
+          height={70}
+          alt={title}
+          className="flex-shrink-0 transition-transform duration-300 group-hover:scale-110 object-cover"
+        />
+      </div>
       <div>
-        <h4 className="text-xl font-bold mb-1 text-pink-700">
+        <h4 className="text-xl font-bold mb-1 text-gray-900 group-hover:text-pink-600 transition-colors">
           {title}
         </h4>
-        <p className="text-gray-600 text-sm max-w-[10rem]">
+        <p className="text-gray-500 text-sm max-w-[10rem]">
           {description}
         </p>
       </div>
@@ -110,7 +112,7 @@ export const HoveredLink = ({ children, ...rest }: React.ComponentProps<typeof L
   return (
     <Link
       {...rest}
-      className="text-gray-600 hover:text-pink-700"
+      className="text-gray-600 hover:text-pink-600 transition-colors font-medium"
     >
       {children}
     </Link>
