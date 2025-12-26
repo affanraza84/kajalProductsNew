@@ -162,10 +162,7 @@ function Navbar({ className }: { className?: string }) {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 h-full w-[280px] bg-white/95 backdrop-blur-2xl shadow-2xl z-50 p-6 flex flex-col gap-6 md:hidden border-l border-white/50"
             >
-              <div className="flex justify-between items-center mb-8">
-                <span className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-                  KajalProducts
-                </span>
+              <div className="flex justify-end items-center mb-8">
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-gray-500 hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
@@ -223,7 +220,7 @@ function Navbar({ className }: { className?: string }) {
                    {/* Add any social icons or simple footer links here if needed */}
                 </div>
                 <p className="text-xs text-center text-gray-400 font-medium tracking-wide">
-                  © 2024 KAJA PRODUCTS
+                  © 2026 KAJAL PRODUCTS
                 </p>
               </div>
             </motion.div>
