@@ -44,10 +44,13 @@ export async function POST(req: Request) {
             { message: "Message sent successfully!", success: true, data: newContact },
             { status: 201 }
         );
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Contact API Error Details:", error);
+
+        const errorMessage = error instanceof Error ? error.message : "Failed to send message";
+
         return NextResponse.json(
-            { error: error?.message || "Failed to send message. Please try again later.", success: false },
+            { error: errorMessage, success: false },
             { status: 500 }
         );
     }
