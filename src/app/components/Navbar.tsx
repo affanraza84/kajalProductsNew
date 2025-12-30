@@ -4,8 +4,8 @@ import { Menu, MenuItem, HoveredLink, ProductItem } from "./ui/navbar-menu";
 import { cn } from "@/app/utils/cn";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { FiMenu, FiX, FiSearch, FiShoppingBag, FiUser, FiShoppingCart } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion";
+import { FiMenu, FiX, FiSearch, FiShoppingBag, FiUser, FiShoppingCart, FiChevronRight } from "react-icons/fi";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
@@ -15,6 +15,31 @@ const menuItems = [
   { title: "Outlets", href: "/outlets" },
   { title: "Contact", href: "/contact" },
 ];
+
+const sidebarVariants: Variants = {
+  open: {
+    x: 0,
+    transition: {
+      type: "tween",
+      ease: "easeOut",
+      duration: 0.3,
+      staggerChildren: 0.1,
+    },
+  },
+  closed: {
+    x: "100%",
+    transition: {
+      type: "tween",
+      ease: "easeIn",
+      duration: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: 20 },
+};
 
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
@@ -30,10 +55,17 @@ function Navbar({ className }: { className?: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen]);
+
   return (
     <>
-
-
       {/* Desktop Logo (Top Left) */}
       <div
         className={cn(
@@ -113,20 +145,18 @@ function Navbar({ className }: { className?: string }) {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 md:hidden flex justify-between items-center px-4 py-2 transition-all duration-300",
           scrolled
-            ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-white/20"
+            ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100"
             : "bg-transparent"
         )}
       >
         <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Kajal Logo" width={32} height={32} className="object-contain" />
-           <span className="font-serif text-lg font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600">
+           <span className="font-serif text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600">
               KajalProducts
            </span>
         </Link>
         
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-4">
-            {/* Mobile Cart Icon */}
+        <div className="md:hidden flex items-center gap-3">
             <Link href="/cart" className="relative p-2 text-gray-600 hover:text-pink-600 transition-colors">
                 <FiShoppingCart size={24} />
                 {cartCount > 0 && (
@@ -138,13 +168,15 @@ function Navbar({ className }: { className?: string }) {
           
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-600 hover:text-pink-600 transition-colors p-2"
+                className="text-gray-800 p-2 active:scale-95 transition-transform"
+                aria-label="Toggle Menu"
             >
-                {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                {isOpen ? <FiX size={26} /> : <FiMenu size={26} />}
             </button>
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -152,77 +184,85 @@ function Navbar({ className }: { className?: string }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 md:hidden"
+              className="fixed inset-0 bg-black/30 backdrop-blur-[2px] z-50 md:hidden"
             />
+            
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[280px] bg-white/95 backdrop-blur-2xl shadow-2xl z-50 p-6 flex flex-col gap-6 md:hidden border-l border-white/50"
+              variants={sidebarVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="fixed top-0 right-0 h-full w-[80%] max-w-[300px] bg-gradient-to-b from-white to-pink-50/80 shadow-2xl z-50 flex flex-col md:hidden border-l border-white/50"
             >
-              <div className="flex justify-end items-center mb-8">
+              {/* Premium Background Pattern */}
+              <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-[0.03] pointer-events-none mix-blend-multiply" />
+
+              {/* Menu Header */}
+              <div className="flex justify-between items-center p-6 border-b border-pink-100/50 relative z-10">
+                <span className="font-serif text-lg font-bold text-gray-900">Menu</span>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 text-gray-500 hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
+                  className="p-2 text-gray-500 hover:text-pink-600 transition-colors rounded-full hover:bg-pink-50"
                 >
                   <FiX size={24} />
                 </button>
               </div>
               
-              <div className="flex flex-col gap-3">
-                {menuItems.map((item, idx) => (
+              {/* Menu Items */}
+              <div className="flex flex-col p-6 gap-2 relative z-10 overflow-y-auto">
+                {menuItems.map((item) => (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + idx * 0.1 }}
+                    variants={itemVariants}
                   >
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="block p-4 rounded-2xl text-lg font-medium text-gray-700 hover:bg-gradient-to-r hover:from-pink-50 hover:to-white hover:text-pink-600 hover:shadow-md transition-all active:scale-95 border border-transparent hover:border-pink-100"
+                      className="group flex items-center justify-between p-4 rounded-xl text-base font-medium text-gray-600 hover:text-pink-600 hover:bg-white hover:shadow-sm transition-all border border-transparent hover:border-pink-100"
                     >
-                      {item.title}
+                      <span>{item.title}</span>
+                      <FiChevronRight className="opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-pink-400" />
                     </Link>
                   </motion.div>
                 ))}
 
+                <div className="my-4 border-t border-dashed border-gray-200/50" />
+
                 {/* Mobile Auth Buttons */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + (menuItems.length * 0.1) }}
-                  className="mt-2"
-                >
+                <motion.div variants={itemVariants}>
                   <SignedOut>
                     <SignInButton mode="modal">
                       <button 
                         onClick={() => setIsOpen(false)}
-                        className="w-full p-4 rounded-2xl text-lg font-bold text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-md transition-all active:scale-95"
+                        className="w-full py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-lg shadow-pink-200 active:scale-95 transition-transform"
                       >
                         Sign In
                       </button>
                     </SignInButton>
                   </SignedOut>
                   <SignedIn>
-                    <div className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                    <div className="flex items-center gap-3 p-4 rounded-xl bg-white border border-pink-100 shadow-sm">
                       <UserButton afterSignOutUrl="/" />
-                      <span className="text-sm font-medium text-gray-600">My Account</span>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-gray-900">My Account</span>
+                        <span className="text-xs text-gray-500">Manage profile</span>
+                      </div>
                     </div>
                   </SignedIn>
                 </motion.div>
               </div>
               
-              <div className="mt-auto pt-6 border-t border-gray-100">
-                <div className="flex justify-center gap-6 mb-6">
-                   {/* Add any social icons or simple footer links here if needed */}
-                </div>
-                <p className="text-xs text-center text-gray-400 font-medium tracking-wide">
-                  © 2026 KAJAL PRODUCTS
+              {/* Footer */}
+              <motion.div 
+                variants={itemVariants}
+                className="mt-auto p-6 border-t border-pink-100/50 relative z-10"
+              >
+                <p className="text-xs text-center text-gray-400 font-medium tracking-wider uppercase">
+                  Designed & Baked with ❤️
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           </>
         )}

@@ -61,14 +61,25 @@ function Footer() {
               <div className="flex flex-col">
                 <span>+91 9470 509 040</span>
                 <span>+91 9570 188 409</span>
-                <span>+91 9471 768 028</span>
+                <span>+91 9431 358 695</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="border-t border-pink-100 mt-12 pt-8 text-center bg-transparent">
-        <p className="text-sm text-gray-500">© 2025 Kajal Bakery&apos;s Cakes & Snacks. All rights reserved.</p>
+        <p className="text-sm text-gray-500">© 2026 Kajal Bakery&apos;s Cakes & Snacks. All rights reserved.</p>
+        <p className="text-xs text-gray-400 mt-2 flex items-center justify-center gap-1">
+          Designed & Developed by
+          <a
+            href="https://www.instagram.com/affanraza8083/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pink-400 hover:text-pink-600 transition-all font-medium flex items-center gap-1"
+          >
+             Affan <FaInstagram className="text-sm" />
+          </a>
+        </p>
       </div>
     </footer>
   );
