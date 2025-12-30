@@ -28,6 +28,16 @@ function Cakes() {
   const { isSignedIn } = useUser();
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(hover: none)").matches);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const productsDetails = cakes.filter(
     (product: Product) => product.isFeatured
@@ -64,8 +74,9 @@ function Cakes() {
             <div
               key={product.id}
               className="relative w-full max-w-sm h-[500px] perspective-1000 group cursor-pointer"
-              onMouseEnter={() => setHoveredId(product.id)}
-              onMouseLeave={() => setHoveredId(null)}
+              onMouseEnter={() => !isMobile && setHoveredId(product.id)}
+              onMouseLeave={() => !isMobile && setHoveredId(null)}
+              onClick={() => isMobile && setHoveredId(hoveredId === product.id ? null : product.id)}
             >
               <BackgroundGradient className="w-full h-full rounded-[2rem] p-0 overflow-hidden bg-white" containerClassName="w-full h-full"> 
                 <motion.div
@@ -77,7 +88,7 @@ function Cakes() {
                     animate={{
                     rotateY: hoveredId === product.id ? 180 : 0,
                     }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                     {/* ... Front Side ... */}
                     <div 

@@ -76,33 +76,33 @@ const HeroSection = () => {
                 }
               }
             }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 leading-[1.1] tracking-tight"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 leading-[1.2] tracking-tight"
           >
             <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } } }} className="block">
               Handcrafted
             </motion.span>
             
-            <span className="block flex flex-col gap-2">
-              <span className="block h-[1.5em] relative overflow-hidden w-full md:w-auto min-w-[340px]"> 
-                <AnimatePresence>
+            <span className="flex flex-col md:block">
+              <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[200px] w-full md:w-auto align-bottom"> 
+                <AnimatePresence mode="wait">
                   <motion.span 
                     key={words[index]}
-                    initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -20, filter: "blur(4px)", position: "absolute" }}
+                    exit={{ opacity: 0, y: -30, filter: "blur(4px)", position: "absolute" }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="text-pink-600 font-serif italic inline-block absolute left-0 top-0 whitespace-nowrap"
+                    className="text-pink-600 font-serif italic block md:inline-block w-full text-center md:text-left absolute left-0 top-0"
                   >
                     {words[index]}
                   </motion.span>
                 </AnimatePresence>
-                <span className="invisible text-pink-600 font-serif italic inline-block">
-                   Elegance
+                <span className="invisible text-pink-600 font-serif italic block md:inline-block">
+                   Perfection
                 </span>
               </span>
               <motion.span 
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-                className="inline-block relative z-10"
+                className="block md:inline-block relative z-10 mt-2 md:mt-0 md:ml-4"
               >
                 in Every Bite
               </motion.span>

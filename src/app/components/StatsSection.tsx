@@ -45,24 +45,26 @@ const StatsSection = () => {
               transition={{
                 duration: 0.8,
                 delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1], // Custom ease for smoothness
+                ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{
-                y: -5,
-                boxShadow: "0 20px 40px -15px rgba(236, 72, 153, 0.1)",
+                y: -8,
+                scale: 1.02,
+                boxShadow: "0 25px 50px -12px rgba(236, 72, 153, 0.15)",
               }}
-              className="group flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-transparent hover:border-pink-100 transition-all duration-500 ease-out cursor-default relative"
+              className="group flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-transparent hover:border-pink-200 transition-all duration-300 ease-out cursor-default relative"
             >
               {/* Subtle Glow Background on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/0 to-pink-50/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative mb-4 text-pink-500 group-hover:scale-110 transition-transform duration-500 ease-out">
+              <div className="absolute inset-0 bg-gradient-to-br from-white to-pink-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Icon Container with Animation */}
+              <div className="relative mb-4 p-4 rounded-2xl bg-pink-50 text-pink-500 group-hover:bg-pink-500 group-hover:text-white group-hover:rotate-6 transition-all duration-300 ease-out shadow-sm group-hover:shadow-pink-200">
                 <stat.icon size={28} strokeWidth={1.5} />
               </div>
 
-              <h3 className="relative text-xl md:text-2xl font-serif font-bold text-gray-900 leading-tight">
+              <h3 className="relative text-xl md:text-2xl font-serif font-bold text-gray-900 leading-tight group-hover:text-pink-600 transition-colors duration-300">
                 {stat.title}{" "}
-                <span className="text-gray-400 font-light block text-sm md:text-base mt-1 font-sans tracking-wide">
+                <span className="text-gray-400 font-light block text-sm md:text-base mt-1 font-sans tracking-wide group-hover:text-pink-400 transition-colors duration-300">
                   {stat.subtitle}
                 </span>
               </h3>
