@@ -85,7 +85,7 @@ export const HoverEffect = ({
             <div className="flex flex-col h-full">
                 <div className="mb-4">
                     <CardTitle>{item.title}</CardTitle>
-                    <p className="text-pink-600 font-bold mt-1 text-lg">${item.price}</p>
+                    <p className="text-pink-600 font-bold mt-1 text-lg">₹{item.price}</p>
                 </div>
                 
                 <div className="mt-auto flex gap-2 w-full">

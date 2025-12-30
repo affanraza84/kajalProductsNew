@@ -149,7 +149,7 @@ export default function ProductsPage() {
 
                         <div className="mt-auto flex flex-col gap-3 w-full">
                              <CardItem translateZ={30} className="text-xl font-bold text-pink-600 text-center">
-                                ${product.price}
+                                ₹{product.price}
                             </CardItem>
                             <CardItem
                                 translateZ={40}

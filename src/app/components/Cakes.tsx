@@ -144,7 +144,7 @@ function Cakes() {
 
                         {/* 5. Price of the cake */}
                         <div className="mt-auto pt-4 border-t border-gray-100 w-full">
-                             <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+                             <span className="text-3xl font-bold text-gray-900">₹{product.price}</span>
                         </div>
                     </div>
                 </motion.div>
